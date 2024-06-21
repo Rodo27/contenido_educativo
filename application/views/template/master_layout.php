@@ -5,7 +5,7 @@
         <div class="wrapper">
 
             <?php $this->load->view('template/navbar'); ?>
-            <?php $this->load->view('template/siderbar', array('siderBar' => $sideBar, 'admin' => $admin_section)); ?>
+            <?php $this->load->view('template/siderbar'); ?>
 
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper" style="background-color: white;">

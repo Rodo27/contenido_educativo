@@ -20,15 +20,27 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		// $this->load->view('welcome_message');
-		
 
 		$data['view'] = 'dashboard/home';
-        $data['scripts'] = ['public/assets/js/empty.js']; 
-        $data['sideBar'] = false;
-        $data['admin_section'] = false;
+		$data['scripts'] = ['public/assets/js/empty.js']; 
 
         $this->load->view('template/master_layout', $data);
     
+	}
+
+	public function administration(){
+		
+		$data['view'] = 'dashboard/administration';
+        $data['scripts'] = ['public/assets/js/administration/tynimce.js']; 
+
+        $this->load->view('template/master_layout', $data);
+	}
+
+	public function product(){
+		
+		$data['view'] = 'dashboard/product';
+        $data['scripts'] = ['public/assets/js/empty.js']; 
+
+        $this->load->view('template/master_layout', $data);
 	}
 }

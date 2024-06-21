@@ -9,12 +9,6 @@
 <!-- <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.16/b-1.5.1/b-html5-1.5.1/b-print-1.5.1/datatables.min.js"></script> -->
 
 
-<!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src=" https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-<script src=" https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
- -->
-
-
 <!-- Bootstrap 4 -->
 <script src="<?= base_url('public/') ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- ChartJS -->
@@ -38,6 +32,10 @@
 <!-- sweet alert -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.37/sweetalert2.min.js" ></script>
 <script src="<?= base_url('public/') ?>plugins/toastr/toastr.min.js"></script>
+
+
+<!-- Add TinyMCE -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.2.0/tinymce.min.js" referrerpolicy="origin"></script>
 
 <script>
     var base_url = "<?=base_url() ?>"
