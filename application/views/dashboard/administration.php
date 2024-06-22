@@ -1,3 +1,11 @@
+<style>
+
+    .tox-tinymce{
+        height: 200px;    
+    }
+
+</style>
+
 <div class="content-header">
     <div class="container-fluid" hidden>
         <div class="row mt-2">
@@ -74,7 +82,7 @@
                         <label for="palabrasClave">Palabras Clave: </label>
                     </div>
                     <div class="col-sm-9 mt-2">
-                        <textarea class="form-control tinymce" id="palabrasClave" rows="2"></textarea>
+                        <textarea class="form-control tinymce" id="palabrasClave" rows="2" style="height: 200px;"></textarea>
                     </div>
 
                     <div class="col-sm-3 mt-2">
@@ -110,7 +118,7 @@
                         <label for="staticDescripcion" class="form-label">Descripción: </label>
                     </div>
                     <div class="col-sm-9 mt-2">
-                        <textarea class="form-control tinymce" id="descripcion" rows="2"></textarea>
+                        <textarea class="form-control tinymce" id="descripcion" rows="2" style="height: 200px;"></textarea>
                     </div>
 
 
