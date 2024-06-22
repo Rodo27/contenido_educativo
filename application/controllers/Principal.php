@@ -28,4 +28,22 @@ class Contenidos extends CI_Controller {
     
 	}
 
+<<<<<<< HEAD
+=======
+	public function administration(){
+		
+		$data['view'] = 'dashboard/administration';
+        $data['scripts'] = ['public/assets/js/administration/tynimce.js']; 
+
+        $this->load->view('template/master_layout', $data);
+	}
+
+	public function product(){
+		
+		$data['view'] = 'dashboard/product';
+        $data['scripts'] = ['public/assets/js/empty.js']; 
+
+        $this->load->view('template/master_layout', $data);
+	}
+>>>>>>> config_db
 }
