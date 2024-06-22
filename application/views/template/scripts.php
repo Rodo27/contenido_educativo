@@ -39,7 +39,6 @@
 
 <script>
     var base_url = "<?=base_url() ?>"
-    var global_id_proceso = ''
 </script>
 <?php
 

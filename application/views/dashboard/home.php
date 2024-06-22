@@ -23,7 +23,7 @@
                         </thead>      
                         <tbody class="text-center">
                             <tr>
-                                <td><a href="<?php echo base_url('contenidos/product'); ?>">Articulo 1</a>
+                                <td><a href="<?php echo base_url('principal/product'); ?>">Articulo 1</a>
                                 <th><img src="image source" class="img-fluid rounded-top" alt="image loading..."
                                 />
                                 </th>

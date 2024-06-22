@@ -37,7 +37,7 @@
                         <tbody class="text-center">
                             <tr>
                                 <td>1</td>
-                                <td><a href="<?php echo base_url('contenidos/product'); ?>">Articulo 1</a>
+                                <td><a href="<?php echo base_url('principal/product'); ?>">Articulo 1</a>
                                 <th><img src="image source" class="img-fluid rounded-top" alt="image loading..."
                                 />
                                 </th>
@@ -59,7 +59,7 @@
 
 <!-- Modal Registrar | Editar -->
 <div class="modal fade" id="formularioModal" tabindex="-1" role="dialog" aria-labelledby="formularioModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+  <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Información del Artículo</h5>

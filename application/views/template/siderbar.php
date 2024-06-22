@@ -25,7 +25,7 @@
 
 
                 <li class="nav-item mt-2">
-                    <a href="<?php echo base_url('/welcome/administration') ?>" class="nav-link">
+                    <a href="<?php echo base_url('/principal/administration') ?>" class="nav-link">
                     <i class="nav-icon fas fa-user-cog"></i>
                         <p><b>Administración</b> </p>
                     </a>
