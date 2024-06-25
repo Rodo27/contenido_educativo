@@ -16,7 +16,7 @@ class Principal extends CI_Controller {
     public function administration(){
 		
 		$data['view'] = 'dashboard/administration';
-        $data['scripts'] = ['public/assets/js/administration/tynimce.js']; 
+        $data['scripts'] = ['public/assets/js/administration/tynimce.js','public/assets/js/administration/administration.js']; 
 
         $this->load->view('template/master_layout', $data);
 	}

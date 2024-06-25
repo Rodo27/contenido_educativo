@@ -14,7 +14,7 @@ class Contenidos_model extends CI_Model {
     public function get($id) {
         $query = $this->db->get_where('products', array('id_producto' => $id));
         $this->db->where('soft_delete =',0);
-        return $query->row_array();
+        return $query->row();
     }
 
 }

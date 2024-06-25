@@ -1,3 +1,20 @@
+<style>
+    .link-style {
+        color: #007bff;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    .link-style:hover {
+        color: #0056b3;
+        text-decoration: underline;
+    }
+    .link-style:focus, .link-style:active {
+        color: #0056b3;
+        text-decoration: underline;
+    }
+</style>
+
+
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mt-2">
@@ -21,14 +38,8 @@
                             <th>Nombre</th>
                             <th >Imagen</th>
                         </thead>      
-                        <tbody class="text-center">
-                            <tr>
-                                <td><a href="<?php echo base_url('principal/product'); ?>">Articulo 1</a>
-                                <th><img src="image source" class="img-fluid rounded-top" alt="image loading..."
-                                />
-                                </th>
-                                </td>
-                            </tr>
+                        <tbody class="text-center" id="tbody">
+                            
                         </tbody>  
                     </table>
                 </div>
@@ -38,5 +49,22 @@
     </div>
 </section>
 
+
+<!-- Modal Ver Producto -->
+<div class="modal fade" id="showProductModal" tabindex="-1" role="dialog" aria-labelledby="formularioModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Información del Artículo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        
+      </div>
+    </div>
+  </div>
+</div>
 
 

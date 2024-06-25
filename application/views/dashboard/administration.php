@@ -34,19 +34,8 @@
                             <th >Imagen</th>
                             <th>Acciones</th>
                         </thead>      
-                        <tbody class="text-center">
-                            <tr>
-                                <td>1</td>
-                                <td><a href="<?php echo base_url('principal/product'); ?>">Articulo 1</a>
-                                <th><img src="image source" class="img-fluid rounded-top" alt="image loading..."
-                                />
-                                </th>
-                                </td>
-                                <td>
-                                    <button class="btn btn-info">Editar</button>
-                                    <button class="btn btn-danger">Borrar</button>
-                                </td>
-                            </tr>
+                        <tbody class="text-center" id="tbody">
+                            
                         </tbody>  
                     </table>
                 </div>
