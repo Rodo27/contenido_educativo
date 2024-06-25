@@ -57,7 +57,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form id="form">
             <div class="form-group ">
                 <div class="row">
                     <div class="col-sm-3">
@@ -66,12 +66,12 @@
                     <div class="col-sm-9">
                         <input type="text" class="form-control" id="titulo" value="" required>
                     </div>
-
+                    
                     <div class="col-sm-3 mt-2">
                         <label for="palabrasClave">Palabras Clave: </label>
                     </div>
                     <div class="col-sm-9 mt-2">
-                        <textarea class="form-control tinymce" id="palabrasClave" rows="2" style="height: 200px;"></textarea>
+                        <textarea class="form-control" id="palabrasClave" rows="2"></textarea>
                     </div>
 
                     <div class="col-sm-3 mt-2">
@@ -117,7 +117,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary"><i class="fas fa-check mr-2"></i>Guardar</button>
+        <button type="button" class="btn btn-primary" id="btnSave"><i class="fas fa-check mr-2"></i>Guardar</button>
       </div>
     </div>
   </div>

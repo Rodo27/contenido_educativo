@@ -110,3 +110,41 @@ function openModal(id_product) {
     
     $('#showProductModal').modal('show');
 }
+
+
+document.getElementById("btnSave").addEventListener("click", function (e) {
+    
+    let formulario = document.getElementById("form");
+    const formData = new FormData();
+    
+    for (let i = 0; i < formulario.elements.length; i++) {
+        const elemento = formulario.elements[i];
+        
+        if (elemento.id) {
+            if (elemento.type === 'file' && elemento.files.length > 0) 
+                formData.append(elemento.id, elemento.files[0]);
+            else 
+                formData.append(elemento.id, elemento.value);
+        }
+    }
+    
+
+    // for (const pair of formData.entries()) {
+    //     console.log(pair[0] + ': ' + pair[1]);
+    // }
+
+    let config ={
+        method: 'POST',
+        body: formData
+    }
+    
+    fetch(base_url+'contenidos/nuevoContenido/', config)
+    .then(response => response.json())
+    .then(data => {
+        console.log('Respuesta del servidor:', data);
+    })
+    .catch(error => {
+        console.error('Error al enviar el formulario:', error);
+       
+    });
+});
