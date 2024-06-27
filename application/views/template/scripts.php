@@ -34,8 +34,12 @@
 <script src="<?= base_url('public/') ?>plugins/toastr/toastr.min.js"></script>
 
 
+<!-- Magnific Popup core JS file -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+
 <!-- Add TinyMCE -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.2.0/tinymce.min.js" referrerpolicy="origin"></script>
+
 
 <script>
     var base_url = "<?=base_url() ?>"

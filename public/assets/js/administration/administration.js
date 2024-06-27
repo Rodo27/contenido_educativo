@@ -27,19 +27,30 @@ async function fetchProducts() {
 
         result.data.forEach(element => {
             table += `<tr>
-                            <td>${element.id_producto}</td>
-                            <td><span class="link-style" style="cursor:pointer;" onclick="openModal(${element.id_producto});">${element.titulo}</span><td>
-                            <td><img src="image source" class="img-fluid rounded-top" alt="image loading..."/>
+                            <td class="align-middle">${element.id_producto}</td>
+                            <td class="align-middle">
+                                <span>${element.titulo}</span>
                             </td>
-                            
-                            <td>
-                                <button class="btn btn-info">Editar</button>
+                            <td class="align-middle">
+                                 <a href="${base_url+element.imagen_previa}" class="image-link" title="Haz clic para ampliar">
+                                    <img src="${base_url+element.imagen_previa}" style="width:60px;" alt="Imagen a ampliar">
+                                </a>
+                            </td>
+                            <td class="align-middle">
+                                 <button class="btn btn-info" onclick="fetchProduct(${element.id_producto});">Editar</button>
                                 <button class="btn btn-danger">Borrar</button>
                             </td>
                         </tr>`;  
         });
 
         document.getElementById('tbody').innerHTML =  table;
+
+        document.getElementById('tbody').innerHTML =  table;
+         
+         // Inicialización de Magnific Popup después de agregar dinámicamente las imágenes
+         $('.image-link').magnificPopup({
+            type: 'image'
+        });
          
 
     } catch (error) {
@@ -55,7 +66,7 @@ async function fetchProduct(id_product) {
         headers: {'Content-Type': 'application/json'}
     }
 
-    let content = '';
+    // let content = '';
 
     try {
 
@@ -64,36 +75,17 @@ async function fetchProduct(id_product) {
         
         console.info(result.data); 
 
-        content = `
-            <section class="content mt-3">
-                <div>
-                    <div class="container mt-1">
-                        <div class="row justify-content-center">
-                            <div class="col-12 d-flex justify-content-center">
-                                <div class="card text-center">
-                                    <div class="card-header">
-                                        <h3>${result.data.titulo}</h3>
-                                    </div>
-                                    <img class="card-img-top img-thumbnail mx-auto d-block" src="${base_url+result.data.image_previa}" alt="Card image cap" style="max-width: 300px; max-height: 300px;">
-                                    <div class="card-body">
-                                        <h5 class="text-center"></h5>
-                                        <p class="card-text">${result.data.contenido}</p>
-                                        <a href="${base_url}" class="btn btn-primary">Regresar</a>
-                                    </div>
-                                </div>
 
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </section>
+        document.getElementById('titulo').value =  result.data.titulo;
+        document.getElementById('palabrasClave').value =  result.data.palabras_clave;
+        document.getElementById('areaConocimiento').value =  result.data.area_conocimiento;
+        document.getElementById('tipoContenido').value =  result.data.tipo_contenido;
         
-        
-        `;
+        console.log()
+        tinymce.get('descripcion').setContent(result.data.descripcion);
 
-        document.getElementById('modal-body').innerHTML =  content;
-         
+
+        $('#formularioModal').modal('show'); 
 
     } catch (error) {
         console.error('Error:', error);
@@ -101,15 +93,15 @@ async function fetchProduct(id_product) {
 }
 
 
-function openModal(id_product) {
+// function openModal(id_product) {
     
-    event.preventDefault();
+//     event.preventDefault();
     
-    console.info(id_product);
-    fetchProduct(id_product);
+//     console.info(id_product);
+//     fetchProduct(id_product);
     
-    $('#showProductModal').modal('show');
-}
+//     $('#showProductModal').modal('show');
+// }
 
 
 document.getElementById("btnSave").addEventListener("click", function (e) {
@@ -127,12 +119,11 @@ document.getElementById("btnSave").addEventListener("click", function (e) {
                 formData.append(elemento.id, elemento.value);
         }
     }
+
+    console.log( tinymce.get("descripcion").getContent());
+
+    formData.append('descripcion', tinymce.get("descripcion").getContent());
     
-
-    // for (const pair of formData.entries()) {
-    //     console.log(pair[0] + ': ' + pair[1]);
-    // }
-
     let config ={
         method: 'POST',
         body: formData

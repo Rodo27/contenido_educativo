@@ -27,13 +27,21 @@ async function fetchProducts() {
 
         result.data.forEach(element => {
             table += `<tr>
-                        <td><span class="link-style" style="cursor:pointer;" onclick="openModal(${element.id_producto});">${element.titulo}</span></td>
-                        <td><img src="image source" class="img-fluid rounded-top" alt="image loading..."/></td>
+                        <td class="align-middle"><span class="link-style" style="cursor:pointer;" onclick="openModal(${element.id_producto});">${element.titulo}</span></td>
+                        <td class="align-middle">    
+                            <a href="${base_url+element.imagen_previa}" class="image-link" title="Haz clic para ampliar">
+                                <img src="${base_url+element.imagen_previa}" style="width:60px;" alt="Imagen a ampliar">
+                            </a>
+                        </td>
                     </tr>`;  
         });
 
         document.getElementById('tbody').innerHTML =  table;
          
+        // Inicialización de Magnific Popup después de agregar dinámicamente las imágenes
+        $('.image-link').magnificPopup({
+            type: 'image'
+        });
 
     } catch (error) {
         console.error('Error:', error);
@@ -67,10 +75,10 @@ async function fetchProduct(id_product) {
                                     <div class="card-header">
                                         <h3>${result.data.titulo}</h3>
                                     </div>
-                                    <img class="card-img-top img-thumbnail mx-auto d-block" src="${base_url+result.data.image_previa}" alt="Card image cap" style="max-width: 300px; max-height: 300px;">
+                                    <img class="card-img-top img-thumbnail mx-auto d-block" src="${base_url+result.data.imagen_previa}" alt="Card image cap" style="max-width: 300px; max-height: 300px;">
                                     <div class="card-body">
                                         <h5 class="text-center"></h5>
-                                        <p class="card-text">${result.data.contenido}</p>
+                                        <p class="card-text">${result.data.descripcion}</p>
                                         <a href="${base_url}" class="btn btn-primary">Regresar</a>
                                     </div>
                                 </div>

@@ -26,6 +26,8 @@
     </div>
 </div>
 
+
+
 <section class="content mt-3">
     <div>
         <h4 class="text-center text-muted">Pantalla Principal</h4>
