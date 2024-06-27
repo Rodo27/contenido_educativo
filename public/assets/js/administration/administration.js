@@ -85,7 +85,9 @@ async function fetchProduct(id_product) {
         tinymce.get('descripcion').setContent(result.data.descripcion);
 
 
-        $('#formularioModal').modal('show'); 
+        $('#formularioModal').modal('show');
+        
+         
 
     } catch (error) {
         console.error('Error:', error);
