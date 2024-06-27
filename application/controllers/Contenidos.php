@@ -16,28 +16,28 @@ class Contenidos extends CI_Controller {
 
     // GET: /products o /product/id
  
-    public function index($id = NULL) {
+    // public function index($id = NULL) {
 
-		if($id === NULL){
-			$products =  $this->contenidos->get_all();
-			echo json_encode(['data' => $products, 'code_status' => 200]);
-		}
-		else{
-			if($this->contenidos->get($id)){
-				$product = $this->contenidos->get($id);
-				echo json_encode(['data' => $products, 'code_status' => 200]);
-			}else
-				echo json_encode(['data' => [], 'code_status' => 404]);
+	// 	if($id === NULL){
+	// 		$products =  $this->contenidos->get_all();
+	// 		echo json_encode(['data' => $products, 'code_status' => 200]);
+	// 	}
+	// 	else{
+	// 		if($this->contenidos->get($id)){
+	// 			$product = $this->contenidos->get($id);
+	// 			echo json_encode(['data' => $products, 'code_status' => 200]);
+	// 		}else
+	// 			echo json_encode(['data' => [], 'code_status' => 404]);
 
-		}
-    }
+	// 	}
+    // }
 
 
 	
     // listaContenidosPortada
     public function listaContenidosPortada() {
 
-			$products =  $this->contenidos->get_all();
+			$products =  $this->contenidos->get_list();
 			echo json_encode(['data' => $products, 'code_status' => 200]);
 		
     }
@@ -50,9 +50,8 @@ class Contenidos extends CI_Controller {
 		
     }
 
-
 	// getProduct
-	public function getProduct(int $id) {
+	public function getProduct($id) {
 		
 		if($this->contenidos->get($id)){
 			$product = $this->contenidos->get($id);
@@ -65,8 +64,8 @@ class Contenidos extends CI_Controller {
 	 // POST: /createProduct
 	public function nuevoContenido(){
 
-        
         $data = $this->input->post();
+        $data = $this->security->xss_clean($data);
 
         $textoData = array(
             'titulo' => $data['titulo'],
@@ -76,35 +75,85 @@ class Contenidos extends CI_Controller {
             'descripcion' => $data['descripcion']
         );
 
-        $textoInsertId = $this->contenidos->insert($textoData);
+        $id_insert = $this->contenidos->insert($textoData);
 
-        if (!$textoInsertId) {
+        if (!$id_insert) {
             echo json_encode(['error' => 'Error al insertar datos de texto', 'code_status' => 500]);
             return;
         }
 
         if (isset($_FILES['imagenPortada'])) {
-			$rutaImagenPortada = $this->guardarImagen('imagenPortada');
-			$this->contenidos->update($textoInsertId, ['imagen_portada' => $rutaImagenPortada]);
+			$rutaImagenPortada = $this->guardarImagen('imagenPortada',$id_insert);
+			$this->contenidos->update($id_insert, ['imagen_portada' => $rutaImagenPortada]);
 		}
 		
 		if (isset($_FILES['imagenPrevia'])) {
-			$rutaImagenPrevia = $this->guardarImagen('imagenPrevia');
-			$this->contenidos->update($textoInsertId, ['imagen_previa' => $rutaImagenPrevia]);
+			$rutaImagenPrevia = $this->guardarImagen('imagenPrevia', $id_insert);
+			$this->contenidos->update($id_insert, ['imagen_previa' => $rutaImagenPrevia]);
 		}
 
         echo json_encode(['message' => 'Contenido creado correctamente', 'code_status' => 201]);
     }
 
 
+	public function actualizarContenido(){
+        
+        $data = $this->input->post();
+        $data = $this->security->xss_clean($data);
 
-	private function guardarImagen($imagenData) {
+        $dataInsert = array(
+            'titulo' => $data['titulo'],
+            'palabras_clave' => $data['palabrasClave'],
+            'area_conocimiento' => $data['areaConocimiento'],
+            'tipo_contenido' => $data['tipoContenido'],
+            'descripcion' => $data['descripcion']
+        );
 
+
+        $result = $this->contenidos->update($data['id_producto'], $dataInsert);
+
+
+		if (isset($_FILES['imagenPortada'])) {
+			$rutaImagenPortada = $this->guardarImagen('imagenPortada',$data['id_producto']);
+			$this->contenidos->update($data['id_producto'], ['imagen_portada' => $rutaImagenPortada]);
+		}
+		
+		if (isset($_FILES['imagenPrevia'])) {
+			$rutaImagenPrevia = $this->guardarImagen('imagenPrevia', $data['id_producto']);
+			$this->contenidos->update($data['id_producto'], ['imagen_previa' => $rutaImagenPrevia]);
+		}
+
+        echo json_encode(['message' => 'Contenido creado correctamente', 'code_status' => 201]);
+    }
+
+
+	public function borrarContenido($id_producto){
+
+
+		$directorio = './public/files/'; 
+		$archivos = scandir($directorio);
+
+		foreach ($archivos as $archivo) {
+			if ($archivo != '.' && $archivo != '..') {
+				if (strpos($archivo, '_'.$id_producto.'.') !== false) 
+					unlink($archivo);
+			}
+		}
+
+		echo json_encode(['message' => 'Contenido borrado correctamente', 'code_status' => 201]);
+	}
+
+
+	private function guardarImagen($imagenData, $id_insert) {
+
+		
+		$extension = pathinfo($imagenData, PATHINFO_EXTENSION);
         
         $config['upload_path'] = './public/files';
         $config['allowed_types'] = 'gif|jpg|png';
         $config['max_size'] = '2048'; 
-        $config['file_name'] = uniqid().'.png';
+        $config['file_name'] = $imagenData.'_'.$id_insert.$extension;
+		$config['override'] = true;
 
 		$this->upload->initialize($config);
 
@@ -118,24 +167,4 @@ class Contenidos extends CI_Controller {
             return $rutaImagen;
         }
     }
-	
-
-	function save_file(){
-        
-        $filename = strval(time() . '.pdf');
-
-        $config['upload_path']          = './public/files';
-        $config['allowed_types']        = 'pdf';
-        $config['max_size']             = '10000';
-        $config['file_name']            = $filename;
-        $config['overwrite']            = true;
-
-        $this->load->library('upload', $config);
-
-        if (!$this->upload->do_upload('file_cmgo'))
-            return array('status' => FALSE, 'filename' => '', 'msg' => $this->upload->display_errors());
-        else
-            return array('status' => TRUE, 'filename' => $filename,  'msg' => 'File uploaded');
-    }
-
 }

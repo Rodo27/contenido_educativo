@@ -72,6 +72,7 @@
       <div class="modal-body">
         <form id="form">
             <div class="form-group ">
+                    <input type="text" value="" id="id_producto" hidden>
                 <div class="row">
                     <div class="col-sm-3">
                         <label for="staticTitulo" class="form-label">Titulo: </label>
@@ -122,7 +123,6 @@
                     <div class="col-sm-9 mt-2">
                         <textarea class="form-control tinymce" id="descripcion" rows="2" style="height: 200px;"></textarea>
                     </div>
-
 
                 </div>
             </div>
